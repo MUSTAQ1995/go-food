@@ -28,10 +28,11 @@ function Restaurnt() {
   
   const [open, setOpen] = useState(false);
   const [item, setItem] = useState(0);
-  const [itemPrice, setItemPrice] = useState()
+  const [itemPrice, setItemPrice] = useState();
   const [ changeValue, setChangeValue] = useState();
   const [add, setAdd] =useState(true);
   const [nonCustomAdd, setNonCustomAdd] = useState(1);
+  const [nonCustomPrice, setNonCustomPrice] = useState(250)
  
   const handleClickOpen = () => {
     setOpen(true);
@@ -59,10 +60,12 @@ function Restaurnt() {
 
   const NonCustomIncrease= () => {
     setNonCustomAdd(nonCustomAdd+1);
+    setNonCustomPrice(nonCustomPrice+250)
   };
 
   const NonCustomDecrease = () => {
     setNonCustomAdd(nonCustomAdd-1);
+    setNonCustomPrice(nonCustomPrice-250)
   };
 
   const Increase = () => {
@@ -171,15 +174,6 @@ function Restaurnt() {
                   className="rating-stars" 
                   {...firstExample}  
                 />
-                {/* <ul className="rating-stars list-unstyled m-0">
-                  <li>
-                    <i className="feather-star text-warning" />
-                    <i className="feather-star text-warning" />
-                    <i className="feather-star text-warning" />
-                    <i className="feather-star text-warning" />
-                    <i className="feather-star" />
-                  </li>
-                </ul> */}
                 <p className="label-rating text-white-50 ml-2 small m-0">
                   {" "}
                   (245 Reviews)
@@ -248,9 +242,14 @@ function Restaurnt() {
                       (
                         <div className="noncustom__price" >
                           <div className="noncustom__buttons" >
-                            <button onClick={NonCustomDecrease} >-</button>
+                            <button 
+                              onClick={NonCustomDecrease} 
+                              
+                              >-</button>
                             <p>{nonCustomAdd}</p>
-                            <button onClick={NonCustomIncrease} >+</button>
+                            <button 
+                              onClick={NonCustomIncrease} 
+                            >+</button>
                           </div>
                       </div>
                       )
@@ -324,19 +323,10 @@ function Restaurnt() {
                         <h6 className="mb-1">Chicken Tikka Sub </h6>
                         <p className="text-muted mb-0">$250</p>
                         <div className="rating-wrap d-flex align-items-center mt-2">
-                          {/* <ul className="rating-stars list-unstyled m-0">
-                            <li>
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star" />
-                            </li>
-                          </ul> */}
-                            <ReactStars 
-                              className="rating-stars" 
-                              {...firstExample}  
-                            />
+                          <ReactStars 
+                            className="rating-stars" 
+                            {...firstExample}  
+                          />               
                           <p className="label-rating text-dark-50 ml-2 small m-0">
                             {" "}
                             (245 Reviews)
@@ -380,19 +370,10 @@ function Restaurnt() {
                         <h6 className="mb-1">Chicken Tikka Sub </h6>
                         <p className="text-muted mb-0">$250</p>
                         <div className="rating-wrap d-flex align-items-center mt-2">
-                          {/* <ul className="rating-stars list-unstyled m-0">
-                            <li>
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star" />
-                            </li>
-                          </ul> */}
-                            <ReactStars 
-                              className="rating-stars" 
-                              {...firstExample}  
-                            />
+                          <ReactStars 
+                            className="rating-stars" 
+                            {...firstExample}  
+                          />
                           <p className="label-rating text-dark-50 ml-2 small m-0">
                             {" "}
                             (245 Reviews)
@@ -436,19 +417,10 @@ function Restaurnt() {
                         <h6 className="mb-1">Chicken Tikka Sub </h6>
                         <p className="text-muted mb-0">$250</p>
                         <div className="rating-wrap d-flex align-items-center mt-2">
-                          {/* <ul className="rating-stars list-unstyled m-0">
-                            <li>
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star text-warning" />
-                              <i className="feather-star" />
-                            </li>
-                          </ul> */}
-                            <ReactStars 
-                              className="rating-stars" 
-                              {...firstExample}  
-                            /> 
+                          <ReactStars 
+                            className="rating-stars" 
+                            {...firstExample}  
+                          /> 
                           <p className="label-rating text-dark-50 ml-2 small m-0">
                             {" "}
                             (245 Reviews)
@@ -550,15 +522,15 @@ function Restaurnt() {
                 <div className="quantity__add" >
                   <p style={{ color: "white"}} >
                     <h5 onClick={()=>handleClose()} >Add {itemPrice}₨</h5>
-                  </p>
-                  
+                  </p>                
                 </div>
               </div>
             </div>   
           </Dialog>
         </div>
         {/* Footer */}
-        { add ? "" :( <div className="fixed-bottom mb-0">
+        { add ? "" :( 
+        <div className="fixed-bottom mb-0">
           <Link
             to="/checkout"
             className="btn btn-success btn-block btn-lg text-white rounded shadow text-decoration-none d-flex align-items-center shadow"
@@ -569,8 +541,8 @@ function Restaurnt() {
               </h4>
             </div>
             <div className="ml-3 text-left">
-              <p className="mb-0 small text-white-50">{item}</p>
-              <p className="mb-0 font-weight-bold text-white">{itemPrice}</p>
+              <p className="mb-0 small text-white-50">{nonCustomAdd} ITEMS</p>
+              <p className="mb-0 font-weight-bold text-white">{nonCustomPrice}</p>
             </div>
             <div className="ml-auto">
               <p className="mb-0 text-white">
@@ -579,7 +551,8 @@ function Restaurnt() {
               </p>
             </div>
           </Link>
-        </div>)}
+        </div>
+        )}
         
       </div>
     </div>
@@ -587,3 +560,27 @@ function Restaurnt() {
 }
 
 export default Restaurnt
+
+
+{/* <div className="fixed-bottom mb-0">
+<Link
+  to="/checkout"
+  className="btn btn-success btn-block btn-lg text-white rounded shadow text-decoration-none d-flex align-items-center shadow"
+>
+  <div className="border-right pr-3">
+    <h4 className="m-0">
+      <i className="feather-shopping-bag" aria-hidden="true" />
+    </h4>
+  </div>
+  <div className="ml-3 text-left">
+    <p className="mb-0 small text-white-50">{item}</p>
+    <p className="mb-0 font-weight-bold text-white">{itemPrice}</p>
+  </div>
+  <div className="ml-auto">
+    <p className="mb-0 text-white">
+      Proceed to cart{" "}
+      <i className="feather-chevron-right pl-2" aria-hidden="true" />
+    </p>
+  </div>
+</Link>
+</div> */}

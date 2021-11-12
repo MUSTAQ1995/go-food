@@ -25,7 +25,7 @@ function Landing() {
       <div className="vh-100 landing-page-skip">
         <Link
           className="position-absolute btn-sm btn btn-outline-primary m-4 zindex"
-          to="/location"
+          to="/home"
         >
           Skip <ChevronRight className="feather-chevrons-right" />
         </Link>

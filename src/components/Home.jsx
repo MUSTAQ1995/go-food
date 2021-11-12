@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   ArrowLeft,
   ChevronRight, 
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import FoodOne from "../img/foodOne.jpg";
 import FoodTwo from "../img/foodTwo.jpg";
 import ReactStars from "react-rating-stars-component";
+import  Geocode from "react-geocode";
 
 
 
@@ -25,6 +26,42 @@ const firstExample = {
 };
 
 function Home() {
+
+  Geocode.setApiKey("AIzaSyATefqmYTyXDI5M4jr9vcZvdsQyoD7bMt8&v=3");
+  Geocode.setLanguage("en");
+  Geocode.setRegion("hi");
+  Geocode.enableDebug();
+
+  const [ currentPosition, setCurrentPosition ] = useState([]);
+
+  useEffect( () => {
+    navigator.geolocation.getCurrentPosition(success);
+
+  }, []);
+
+  const success = position => {
+    const currentPosition = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    }
+    console.log(currentPosition.lat)
+    console.log(currentPosition.lng)
+    Geocode.fromLatLng(currentPosition.lat, currentPosition.lng ).then(
+      response => {
+        const address = response.results[0].formatted_address;
+        console.log(address);
+        setCurrentPosition(address);
+      },
+      error => {
+        console.error("Error at generating the address",error);
+      }
+    );
+    // setLat(currentPosition.lat)
+    // setLan(currentPosition.lng) 
+    // setCurrentPosition(currentPosition);
+
+  };
+
   return (
     <div>
       <div className="osahan-home-page">
@@ -51,7 +88,7 @@ function Home() {
                 {/* <ArrowBackIosIcon fontSize={"small"} /> */}
                 {/* <MapPin className="feather-map-pin fs-18 mr-2" /> */}
                 <h6 className="border-dashed-bottom home__location ">
-                  Pune, Maharashtra 411014
+                  {currentPosition}
                 </h6>
               </Link>
             </div>

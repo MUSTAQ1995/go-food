@@ -36,6 +36,7 @@ import Orders from '../Orders';
 import CatRestaurnt from '../CatRestaurants';
 import OffRestaurnt from '../OffRestraunt';
 import SeeMoreRest from '../SeeMoreRest';
+import SelectAddress from '../SelectAddress';
 
 
 
@@ -82,6 +83,7 @@ function Routes() {
           <Route path="/offer&restraunts" component={OffRestaurnt} />
           <Route path="/allrestraunt" component={SeeMoreRest} />
           <Route path="/restaurant" component={Restaurnt} />
+          <Route path="/select-address" component={SelectAddress} />
         </Switch> 
       </BrowserRouter>
     </div>

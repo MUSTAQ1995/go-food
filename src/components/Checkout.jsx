@@ -2,12 +2,23 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import FoodOne from "../img/foodOne.jpg";
 import FoodTwo from "../img/foodTwo.jpg";
+import Dialog from '@mui/material/Dialog';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import Slide from '@mui/material/Slide';
+import AddLocationIcon from '@mui/icons-material/AddLocation';
+import WorkIcon from '@mui/icons-material/Work';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 
 function Checkout() {
 
   const [item, setItem ] = useState(1);
-  const [PriceItem, setPriceItem] = useState(89)
+  const [PriceItem, setPriceItem] = useState(89);
+  const [open, setOpen] = useState(false);
+  const [itemPrice, setItemPrice] = useState();
 
   const Decrease = () => {
     setItem(item-1);
@@ -18,6 +29,15 @@ function Checkout() {
     setItem(item+1)
     setPriceItem(PriceItem+89)
   }
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <div className="osahan-checkout">
@@ -54,7 +74,7 @@ function Checkout() {
                 alt="delivery__location"
               />
               <h6>Work- <strong>552, 2nd floor, Sector 4, HSR Layout, Bengaluru.</strong> 
-                <em>change</em>
+                <em onClick={() => handleClickOpen()} >change</em>
               </h6>
            </div>
            <div className="delivery__time" >
@@ -352,6 +372,43 @@ function Checkout() {
           </div>
           <div className="del__inst" >
 
+          </div>
+          <div >
+            <Dialog
+              fullScreen
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Transition}
+            > 
+            
+            <HighlightOffIcon
+              className="close__modal"
+              fontSize={"large"}
+              onClick={handleClose} 
+            />
+              <div className="address__modal" >
+                <div className="select__address" >
+                  <h5>Select an Address</h5>
+                </div>
+                <Link to="/select-address" >
+                  <div className="add__address" >
+                    <AddLocationIcon fontSize="small" style={{ marginLeft: '10px' }} />
+                    <h6>Add Address</h6>
+                  </div>
+                </Link>
+                <div className="saved__Addresses" >
+                  <h5>Saved Addresses</h5>
+                  <h6>DELIVERS TO</h6>
+                  <div className="delivers__address" >
+                    <WorkIcon fontSize="small" />
+                    <div className="deliver__address" >
+                      <h6>Work</h6>
+                      <p>#552, 2nd floor,15th cross, 16th main, sector-4, HSR-Layout Bengaluru-560102</p>
+                    </div>
+                  </div>
+                </div>
+              </div>   
+            </Dialog>
           </div>
           <br/>
           <br/>

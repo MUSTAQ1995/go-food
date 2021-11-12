@@ -1630,7 +1630,7 @@ background: linear-gradient(
 	45deg, #c4302e 0%, #f51042 100%);
 }
 
-.noncustom__price {
+/* .noncustom__price {
 	position: absolute;
   display: flex;
 	border: 1px solid #C4302B;
@@ -1638,31 +1638,132 @@ background: linear-gradient(
 	border-radius: 10px;
 	margin-left: 5%;
 	margin-top: -10px;
+} */
+.noncustom__price {
+	position: absolute;
+  border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	width: 17%;
+	height: 25px;
+	background-color: tomato;
+	margin-left: 2.5%;
+	margin-top: -13px ;
+	border-radius: 10px;
 }
 
-.noncustom__buttons{
+.noncustom__price:hover {
+	background-color: #C4302B;
+	cursor: pointer;
+}
+/* .noncustom__buttons{
 	display: flex;
 	align-items: center;
 
 	border-radius: 5px;
 	height: 21px;
+} */
+.noncustom__buttons{
+  display: flex;
 }
 
-.noncustom__buttons > button {
+/* .noncustom__buttons > button {
 	border: none;
 	outline: none;
 	background-color: transparent;
 
+} */
+
+.noncustom__buttons > button {
+	border: none;
+  outline: none;
+	background: transparent;
 }
+
 
 .noncustom__buttons > button:hover {
-	background-color: #C4302B;
-	border: 1px solid transparent;
-	border-radius: 5px;
+	background-color: transparent;
+	border: none;
 	outline: none;
-	cursor: pointer;
 }
 
-.noncustom__buttons > p {
+
+
+/* .noncustom__buttons > p {
   padding-top: 10px;
+} */
+
+.noncustom__buttons > p {
+  padding-top: 2px ;
+	color: white;
+}
+
+.address__modal {
+	background-color: white;
+	height: 100vh;
+}
+
+.select__address {
+  border-bottom: 1px solid lightgray;
+}
+
+.select__address > h5 {
+	font-size: 12px;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 8px;
+}
+
+.add__address {
+	display: flex;
+	color: lightsalmon;
+	margin-top: 5px;
+	border-bottom: 1px solid lightgrey;
+	
+}
+
+.add__address > h6 {
+	font-size: 12px;
+	padding-top: 5px;
+	margin-left: 5px;
+}
+
+.saved__Addresses {
+	margin-top: 10px;
+	border-bottom: 1px solid lightgrey;
+}
+
+.saved__Addresses > h5 {
+	font-size: 12px;
+	margin-left: 10px;
+}
+
+.saved__Addresses > h6 {
+  font-size: 10px;
+	margin-left: 10px;
+	color: rgb(7, 69, 90);
+}
+
+.delivers__address {
+	display: flex;
+	margin-left: 10px;
+	color: lightcoral;
+}
+
+.deliver__address {
+	margin-left: 5px;
+	
+}
+
+.deliver__address > h6 {
+	font-size: 12px;
+	margin-bottom: 0px;
+
+}
+
+.deliver__address > p {
+	font-size: 10px;
+	color: black;
 }
