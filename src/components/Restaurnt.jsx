@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import React, { useState,useEffect }from 'react';
 import { 
   Search, 
 } from 'react-feather';
@@ -42,6 +42,13 @@ function Restaurnt() {
     setOpen(false);
   };
 
+  useEffect(()=>{
+    
+    if(nonCustomAdd==0){
+  
+      setAdd(true)
+    }
+  },[nonCustomAdd])
   // const Increase = () => {
   //   setItem(item+1);
   //   setItemPrice(itemPrice+70);
@@ -59,25 +66,24 @@ function Restaurnt() {
   }
 
   const NonCustomIncrease= () => {
+
     setNonCustomAdd(nonCustomAdd+1);
     setNonCustomPrice(nonCustomPrice+250)
   };
 
   const NonCustomDecrease = () => {
+    
+    
     setNonCustomAdd(nonCustomAdd-1);
+   
     setNonCustomPrice(nonCustomPrice-250)
   };
 
   const Increase = () => {
     setItem(item+1);
-    console.log()
     const one = parseInt(changeValue);
-    console.log(one)
     const two = parseInt(item);
-    console.log(two);
-
-     setItemPrice(one * two);
-     console.log(itemPrice);
+    setItemPrice(one * two);
   };
 
   const Decrease = () => {
@@ -91,7 +97,13 @@ function Restaurnt() {
      setItemPrice(one * two);
      console.log(itemPrice);
   }
+  const clik=()=>{
+    if(nonCustomAdd == 0) {
 
+   
+     }
+  }
+ 
   return (
     <div>
       <div className="osahan-restaurant">

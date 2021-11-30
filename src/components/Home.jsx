@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { 
-  ArrowLeft,
   ChevronRight, 
   Filter, 
-  Heart, 
-  MapPin, 
   Search, 
-  Star,} from 'react-feather';
-import { Link } from 'react-router-dom';
+} from 'react-feather';
+import { Link, useHistory } from 'react-router-dom';
 import FoodOne from "../img/foodOne.jpg";
 import FoodTwo from "../img/foodTwo.jpg";
 import ReactStars from "react-rating-stars-component";
 import  Geocode from "react-geocode";
+import Dialog from '@mui/material/Dialog';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import Slide from '@mui/material/Slide';
+import GpsFixedIcon from '@mui/icons-material/GpsFixed';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import SearchIcon from '@mui/icons-material/Search';
+import Autocomplete from "react-google-autocomplete";
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import {geocodeByAddress, getLatLng } from "react-google-places-autocomplete"
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});  
+
 
 
 
@@ -32,12 +43,28 @@ function Home() {
   Geocode.setRegion("hi");
   Geocode.enableDebug();
 
+  const history = useHistory();
+
   const [ currentPosition, setCurrentPosition ] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
-  useEffect( () => {
-    navigator.geolocation.getCurrentPosition(success);
+  
+  console.log(value.label)
 
-  }, []);
+  // useEffect( () => {
+  //   navigator.geolocation.getCurrentPosition(success);
+  // }, []);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  
 
   const success = position => {
     const currentPosition = {
@@ -49,18 +76,35 @@ function Home() {
     Geocode.fromLatLng(currentPosition.lat, currentPosition.lng ).then(
       response => {
         const address = response.results[0].formatted_address;
-        console.log(address);
+        // console.log(address);
         setCurrentPosition(address);
       },
       error => {
         console.error("Error at generating the address",error);
       }
     );
-    // setLat(currentPosition.lat)
-    // setLan(currentPosition.lng) 
-    // setCurrentPosition(currentPosition);
-
   };
+
+  useEffect(() => {
+    if(localStorage.getItem("address") != " "){
+      setCurrentPosition(localStorage.getItem("address"))
+    } 
+  }, []);
+
+  var label=value.label
+  Geocode.fromAddress(label).then(
+    (response) => {
+      const { lat, lng } = response.results[0].geometry.location;
+      console.log(lat, lng);
+      localStorage.setItem("lat", lat);
+      localStorage.setItem("lan", lng);
+      console.log(localStorage.getItem("lat"));
+      console.log(localStorage.getItem("lan"));
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 
   return (
     <div>
@@ -68,10 +112,10 @@ function Home() {
         <div className="shadow p-3 homepage-osahan-header bg-white">
           <div className="title d-flex align-items-center">
             <div className="mr-auto">
-              <Link
-                className="text-dark d-flex align-items-center"
-                to="/location"
+              <p
+                className="text-dark d-flex align-items-center"               
               >
+                <Link to="/location" >
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width={18}
@@ -85,12 +129,15 @@ function Home() {
                   d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
                 />
               </svg>
-                {/* <ArrowBackIosIcon fontSize={"small"} /> */}
-                {/* <MapPin className="feather-map-pin fs-18 mr-2" /> */}
-                <h6 className="border-dashed-bottom home__location ">
+              </Link>
+              
+                <h6 
+                  className="border-dashed-bottom home__location "
+                  onClick={handleClickOpen}
+                >
                   {currentPosition}
                 </h6>
-              </Link>
+              </p>
             </div>
             <div className="ml-auto d-flex align-items-center">
               <Link
@@ -138,6 +185,9 @@ function Home() {
             />
           </div>
         </div>
+          <Link to="/order-tracking">
+            <p>Tracking map</p>
+          </Link>
         {/* Filters */}
         <div className="osahan-main" >
           <div className="cat-slider border-bottom" >         
@@ -188,15 +238,6 @@ function Home() {
                           {...firstExample} 
                           
                           />
-                        {/* <ul className="rating-stars list-unstyled">
-                          <li>
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} />
-                          </li>
-                        </ul> */}
                         <p />
                       </div>
                       <div className="list-card-badge d-flex align-items-center">
@@ -239,15 +280,6 @@ function Home() {
                         <p className="text-gray mb-1 small">Indian, Pure veg</p>
                         <p className="text-gray mb-1 rating"></p>
                         <ReactStars className="rating-stars" {...firstExample} />
-                        {/* <ul className="rating-stars list-unstyled">
-                          <li>
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} />
-                          </li>
-                        </ul> */}
                         <p />
                       </div>
                       <div className="list-card-badge d-flex align-items-center">
@@ -295,15 +327,6 @@ function Home() {
                           isHalf={true}
                           value={3}
                         />
-                        {/* <ul className="rating-stars list-unstyled">
-                          <li>
-                            <i className=" feather-star star_active" />
-                            <i className="feather-star star_active" />
-                            <i className=" feather-star star_active" />
-                            <i className="feather-star star_active" />
-                            <i className="feather-star" />
-                          </li>
-                        </ul> */}
                         <p />
                       </div>
                       <div className="list-card-badge d-flex align-items-center">
@@ -346,15 +369,6 @@ function Home() {
                         <p className="text-gray mb-1 small">American, Pure veg</p>
                         <p className="text-gray mb-1 rating"></p>
                         <ReactStars className="rating-stars" {...firstExample} />
-                        {/* <ul className="rating-stars list-unstyled">
-                          <li>
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} className=" star_active" />
-                            <Star size={15} />
-                          </li>
-                        </ul> */}
                         <p />
                       </div>
                       <div className="list-card-badge d-flex align-items-center">
@@ -392,8 +406,7 @@ function Home() {
                       </div>
                       <div className="favourite-heart position-absolute">
                         <Link to="#">
-                        <i className="feather-bookmark" />
-                          {/* <Bookmark size={15} className="feather-bookmark" /> */}
+                          <i className="feather-bookmark" />
                         </Link>
                       </div>
                       <div className="member-plan position-absolute">
@@ -539,6 +552,62 @@ function Home() {
         </div>
         <br/>
         <br/>
+
+        <div >
+          <Dialog
+            fullScreen
+            // style={{ marginTop: "30vh" }}
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Transition}
+          > 
+          
+          <HighlightOffIcon
+          className="close__modal"
+          fontSize={"large"}
+          onClick={handleClose} 
+        /> 
+           <div className="modal__body" >
+              <div className="modal__heading" >
+                <h5>Select a location</h5>
+                <div className="auto__search" >
+                  {/* <SearchIcon/> */}
+                  {/* <Autocomplete
+                    apiKey="AIzaSyATefqmYTyXDI5M4jr9vcZvdsQyoD7bMt"
+                    onPlaceSelected={(place) => {
+                      console.log(place);
+                    }}
+                  /> */}
+                  {/* <Link to="./confirm-address"> */}
+                  <GooglePlacesAutocomplete 
+                    apiKey="AIzaSyATefqmYTyXDI5M4jr9vcZvdsQyoD7bMt8"
+                    selectProps={{
+                      value,
+                      onChange: setValue
+                      
+                    }}
+                  />
+                  {/* </Link>  */}
+               
+                </div>
+                <Link to="/confirm-address" >
+                  <div className="current__location" >
+                    <div className="location__icon" >
+                      <GpsFixedIcon fontSize="small" />
+                    </div>
+                    <div className="location__details" >
+                      <h6>Use current location</h6>
+                      <p> {currentPosition} </p>
+                    </div>
+                    <div className="setcurrent__location" >
+                        <KeyboardArrowRightIcon fontSize="small" />
+                    </div>
+                  </div>
+                </Link>
+              </div>
+           </div>
+          </Dialog>
+        </div>
    
         
         {/* Footer */}

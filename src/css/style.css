@@ -1350,6 +1350,10 @@ h5.modal-title {
 .home__location {
 	padding-top: 5px;
 	margin-left: 20px;
+	width: 50vw;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .categoty__name {
@@ -1644,10 +1648,10 @@ background: linear-gradient(
   border: 1px solid black;
 	display: flex;
 	justify-content: center;
-	width: 17%;
+	width: 70px;
 	height: 25px;
 	background-color: tomato;
-	margin-left: 2.5%;
+	margin-left: 10px;
 	margin-top: -13px ;
 	border-radius: 10px;
 }
@@ -1767,3 +1771,89 @@ background: linear-gradient(
 	font-size: 10px;
 	color: black;
 }
+
+.gm-style-cc span {
+	display: none !important;
+}
+
+.gm-style-cc button {
+	display: none !important;
+}
+
+.gm-style-cc a {
+	display: none;
+}
+
+.modal__body {
+	background-color: white;
+	height: 100vh;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+
+.modal__heading {
+	margin: 10px;
+}
+
+.modal__heading > h5 {
+	font-size: 14px;
+}
+
+.auto__search {
+	border: 1px solid red;
+}
+
+.current__location {
+	display: flex;
+	justify-content: space-between;
+  margin-top: 5px;
+	border-bottom: 1px solid #C4302B;
+}
+
+.location__icon {
+	/* flex: 0.1; */
+	color: #C4302B;
+}
+
+.location__details {
+	flex: 1;
+  margin-left: 10px;
+}
+
+.location__details > h6 {
+	color: #C4302B;
+}
+.location__details > p {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  width: 80vw;
+}
+
+.setcurrent__location {
+	/* flex: 0.1; */
+  color: #C4302B;
+	font-size: 10px;
+}
+
+.show__address {
+	margin: 10px;
+}
+
+.confirm__buttom {
+	margin-top: 10px;
+	margin-bottom: 10px;
+  width: 100%;
+	background-color: #C4302B;
+	color: white;
+	font-size: large;
+	font-weight: bold;
+	border-radius: 10px;
+	border: none;
+	height: 3rem;
+}
+
+/* .confirm__buttom > button {
+	background-color: ;
+} */

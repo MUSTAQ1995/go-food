@@ -37,6 +37,9 @@ import CatRestaurnt from '../CatRestaurants';
 import OffRestaurnt from '../OffRestraunt';
 import SeeMoreRest from '../SeeMoreRest';
 import SelectAddress from '../SelectAddress';
+import SetCurrentLocation from '../SetCurrentLocation';
+import InputAddress from '../InputAddress';
+import MapTracking from '../MapTracking';
 
 
 
@@ -84,6 +87,9 @@ function Routes() {
           <Route path="/allrestraunt" component={SeeMoreRest} />
           <Route path="/restaurant" component={Restaurnt} />
           <Route path="/select-address" component={SelectAddress} />
+          <Route path="/confirm-address" component={SetCurrentLocation} />
+          <Route path="/input-address" component={InputAddress} />
+          <Route path="/order-tracking" component={MapTracking} />
         </Switch> 
       </BrowserRouter>
     </div>
