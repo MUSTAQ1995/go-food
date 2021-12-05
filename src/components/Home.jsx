@@ -14,10 +14,8 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import Slide from '@mui/material/Slide';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import SearchIcon from '@mui/icons-material/Search';
-import Autocomplete from "react-google-autocomplete";
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import {geocodeByAddress, getLatLng } from "react-google-places-autocomplete"
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -88,7 +86,9 @@ function Home() {
   useEffect(() => {
     if(localStorage.getItem("address") != " "){
       setCurrentPosition(localStorage.getItem("address"))
-    } 
+    } else {
+      navigator.geolocation.getCurrentPosition(success);
+    }
   }, []);
 
   var label=value.label
@@ -185,9 +185,9 @@ function Home() {
             />
           </div>
         </div>
-          <Link to="/order-tracking">
+          {/* <Link to="/order-tracking">
             <p>Tracking map</p>
-          </Link>
+          </Link> */}
         {/* Filters */}
         <div className="osahan-main" >
           <div className="cat-slider border-bottom" >         
@@ -563,10 +563,10 @@ function Home() {
           > 
           
           <HighlightOffIcon
-          className="close__modal"
-          fontSize={"large"}
-          onClick={handleClose} 
-        /> 
+            className="close__modal"
+            fontSize={"large"}
+            onClick={handleClose} 
+          /> 
            <div className="modal__body" >
               <div className="modal__heading" >
                 <h5>Select a location</h5>
@@ -608,8 +608,8 @@ function Home() {
            </div>
           </Dialog>
         </div>
-   
-        
+
+      
         {/* Footer */}
         <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center mt-30">
           <div class="row">

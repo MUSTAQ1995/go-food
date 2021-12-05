@@ -1854,6 +1854,10 @@ background: linear-gradient(
 	height: 3rem;
 }
 
-/* .confirm__buttom > button {
-	background-color: ;
-} */
+.order__status {
+	position: relative;
+	bottom: 100;
+	border: 1px solid red;
+	height: 100px;
+	width: 100%;
+}

@@ -166,7 +166,7 @@ const SetCurrentLocation = compose(
     <>
       <GoogleMap
         ref={refMap}
-        defaultZoom={10}
+        defaultZoom={15}
         // center={center}
         defaultCenter={center}
         // defaultCenter={currentPosition}
@@ -182,7 +182,7 @@ const SetCurrentLocation = compose(
           scrollwheel: false,
           gestureHandling: "greedy",
           disableDefaultUI: true,
-          fullscreenControl: false,
+         
         }}
       >  
         <GooglePlacesAutocomplete 
